@@ -55,6 +55,11 @@ class BasePrefetcher(ClockedObject):
     on_data  = Param.Bool(True, "Notify prefetcher on data accesses")
     on_inst  = Param.Bool(True, "Notify prefetcher on instruction accesses")
 
+class DynamicProfetcher(BasePrefetcher):
+    type = 'DynamicPrefetcher'
+    cxx_class = "DynamicPrefetcher"
+    cxx_header = "mem/cache/prefetch/dynamic.hh"
+
 class QueuedPrefetcher(BasePrefetcher):
     type = "QueuedPrefetcher"
     abstract = True
