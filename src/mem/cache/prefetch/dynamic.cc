@@ -97,7 +97,7 @@ compareInstruction(inst_t instruction){
 	}
 }
 
-void
+char
 DynamicPrefetcher::
 PrefetchConfig::
 getPrefetchBlocks(){
