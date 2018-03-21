@@ -1,3 +1,5 @@
+# NOTE: You will need to change directory names to your paths
+#
 # Copyright (c) 2012-2013 ARM Limited
 # All rights reserved.
 #
@@ -41,8 +43,6 @@
 # Simple test script
 #
 # "m5 test.py"
-
-from __future__ import print_function
 
 import optparse
 import sys
@@ -133,7 +133,7 @@ if '--ruby' in sys.argv:
 (options, args) = parser.parse_args()
 
 if args:
-    print("Error: script doesn't take any positional arguments")
+    print "Error: script doesn't take any positional arguments"
     sys.exit(1)
 
 multiprocesses = []
@@ -142,30 +142,48 @@ numThreads = 1
 if options.bench:
     apps = options.bench.split("-")
     if len(apps) != options.num_cpus:
-        print("number of benchmarks not equal to set num_cpus!")
+        print "number of benchmarks not equal to set num_cpus!"
         sys.exit(1)
 
     for app in apps:
-        try:
-            if buildEnv['TARGET_ISA'] == 'alpha':
-                exec("workload = %s('alpha', 'tru64', '%s')" % (
+        #Tosi's changes for ECE 462/562 from here!!!
+        process = Process()
+        bin_dir = '/home/brigh/Documents/ECE462/benchmarks/' #Change to the full path to your benchmarks directory
+    if app == 'mcf': 
+            process.executable = bin_dir+'spec2006/mcf/mcf_base.armv71'
+            data = bin_dir+'spec2006/mcf/test/input/inp.in'
+            output = bin_dir+'spec2006/mcf/inp.out'
+            process.cmd = [process.executable] + [data] + ['>'] + [output]
+    elif app == 'bzip2': 
+            process.executable = bin_dir+'spec2006/bzip2/bzip2_base.armv71'
+            data = bin_dir+'spec2006/bzip2/test/input/chicken.jpg'
+            output = bin_dir+'spec2006/bzip2/input.program.out'
+            process.cmd = [process.executable] + [data] + ['30', '>'] +  [output] + ['2>'] +  [bin_dir+'spec2006/bzip2/chicken.err']
+    elif app == 'libquantum': 
+            process.executable = bin_dir+'spec2006/libquantum/libquantum_base.armv71'
+            process.cmd = [process.executable] + ['1397 8']
+            process.output = bin_dir+'spec2006/libquantum/libquantum_ref.out'
+    elif app == 'a2time01':
+            process.executable = bin_dir+'eembc/A2TIME01'
+            process.cmd = [process.executable] + ['-autogo']
+            process.output = bin_dir+'eembc/output/a2time01.out'
+    elif app == 'cacheb01':
+            process.executable = bin_dir+'eembc/CACHEB01'
+            process.cmd = [process.executable] + ['-autogo']
+            process.output = bin_dir+'eembc/output/cacheb01.out'
+    elif app == 'bitmnp01':
+            process.executable = bin_dir+'eembc/BITMNP01'
+            process.cmd = [process.executable] + ['-autogo']
+            process.output = bin_dir+'eembc/output/bitmnp01.out'
+    else:
+            exec("workload = %s(buildEnv['TARGET_ISA', 'linux', '%s')" % (
                         app, options.spec_input))
-            elif buildEnv['TARGET_ISA'] == 'arm':
-                exec("workload = %s('arm_%s', 'linux', '%s')" % (
-                        app, options.arm_iset, options.spec_input))
-            else:
-                exec("workload = %s(buildEnv['TARGET_ISA', 'linux', '%s')" % (
-                        app, options.spec_input))
-            multiprocesses.append(workload.makeProcess())
-        except:
-            print("Unable to find workload for %s: %s" %
-                  (buildEnv['TARGET_ISA'], app),
-                  file=sys.stderr)
-            sys.exit(1)
+    multiprocesses.append(process)
+    
 elif options.cmd:
     multiprocesses, numThreads = get_processes(options)
 else:
-    print("No workload specified. Exiting!\n", file=sys.stderr)
+    print >> sys.stderr, "No workload specified. Exiting!\n"
     sys.exit(1)
 
 
