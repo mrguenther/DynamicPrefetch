@@ -25,7 +25,7 @@ private:
 		/**
 		 * If prefetchBlocks > 0b000, decrement prefetchBlocks.
 		 */
-		void incrementPrefetchBlocks();
+		void decrementPrefetchBlocks();
 
 		/**
 		 * If matchCounter >= matchThreshold, call incrementPrefetchBlocks().
@@ -54,7 +54,7 @@ private:
 
 		/**
 		 * Compare an instruction on the stored instruction.
-		 * In the case of a match, increment instMatches.
+		 * In the case of a match, increment matchCounter.
 		 * Increment instructionIndex.
 		 * If instructionIndex >= instructionInterval, call endInterval().
 		 */
