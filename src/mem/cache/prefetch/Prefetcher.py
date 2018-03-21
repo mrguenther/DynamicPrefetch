@@ -59,8 +59,7 @@ class DynamicPrefetcher(BasePrefetcher):
     type = 'DynamicPrefetcher'
     cxx_class = "DynamicPrefetcher"
     cxx_header = "mem/cache/prefetch/dynamic.hh"
-    instruction_interval = Param.Int()
-    match_threshold = Param.Int()
+    instruction_interval = Param.Int(200, "Store every N instruction for matching")
 
 
 class QueuedPrefetcher(BasePrefetcher):
