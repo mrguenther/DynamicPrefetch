@@ -59,16 +59,7 @@ class DynamicPrefetcher(BasePrefetcher):
     type = 'DynamicPrefetcher'
     cxx_class = "DynamicPrefetcher"
     cxx_header = "mem/cache/prefetch/dynamic.hh"
-<<<<<<< HEAD
-    instruction_interval = Param.Int(200, "Store every N instruction for matching")
-=======
-    instruction_interval = Param.Int()
-    instruction_index = Param.Int()
-    match_threshold = Param.Int()
-    match_counter = Param.Int()
-    prefetch_blocks = Param.Char()
->>>>>>> parent of c870369... Changes to Prefetcher.py
-
+    
 
 class QueuedPrefetcher(BasePrefetcher):
     type = "QueuedPrefetcher"
