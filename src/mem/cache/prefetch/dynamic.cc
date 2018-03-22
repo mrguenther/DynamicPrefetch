@@ -1,6 +1,8 @@
 #include <string> // Temporary
 
 #include "mem/cache/prefetch/dynamic.hh"
+#include "debug/HWPrefetch.hh"
+#include "mem/cache/base.hh"
 
 /*
  * DynamicPrefetcher definitions:

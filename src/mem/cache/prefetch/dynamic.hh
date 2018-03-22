@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include "mem/cache/prefetch/base.hh"
+#include "params/DynamicPrefetcher.hh"
 
 typedef uint32_t inst_t; // data type for instructions
 
