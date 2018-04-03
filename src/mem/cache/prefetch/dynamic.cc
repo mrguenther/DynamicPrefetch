@@ -7,28 +7,21 @@
  */
 
 DynamicPrefetcher::DynamicPrefetcher(const DynamicPrefetcherParams* p)
-	: BasePrefetcher(p), instructionInterval(p->instruction_interval),
-	matchThreshold(p->match_threshold)
-	 /*
-	, nextParameter(p->nextParameter)
-	, etc(p->etc) */
+    : BasePrefetcher(p),
+    instructionInterval(p->instruction_interval),
+    matchThreshold(p->match_threshold)
 {
 
 }
 
 DynamicPrefetcher::~DynamicPrefetcher(){
+
 }
-
-
-
 
 
 /*
  * PrefetchConfig definitions:
  */
-
-
-
 
 void
 DynamicPrefetcher::
@@ -90,3 +83,8 @@ getPrefetchBlocks(){
 	return prefetchBlocks >> 1;
 }
 
+DynamicPrefetcher*
+DynamicPrefetcherParams::create()
+{
+    return new DynamicPrefetcher(this);
+}
