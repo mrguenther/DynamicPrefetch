@@ -1,0 +1,97 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+	T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+% \usepackage[scaled=0.9]{DejaVuSansMono}
+\usepackage{inconsolata}
+\usepackage{xifthen}
+\usepackage{chngpage}
+
+\makeatletter
+% Suppress warnings for missing italics in Inconsolata
+\@namedef{T1/zi4/m/it}{<->ssub*zi4/m/n}
+\@namedef{T1/zi4/b/it}{<->ssub*zi4/b/n}
+\@namedef{T1/zi4/bx/it}{<->ssub*zi4/b/n}
+\@namedef{T1/zi4/m/sl}{<->ssub*zi4/m/n}
+\@namedef{T1/zi4/b/sl}{<->ssub*zi4/b/n}
+\@namedef{T1/zi4/bx/sl}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/m/it}{<->ssub*zi4/m/n}
+\@namedef{TS1/zi4/b/it}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/bx/it}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/m/sl}{<->ssub*zi4/m/n}
+\@namedef{TS1/zi4/b/sl}{<->ssub*zi4/b/n}
+\@namedef{TS1/zi4/bx/sl}{<->ssub*zi4/b/n}
+\makeatother
+
+\newlength{\authorboxwidth}
+\setlength{\authorboxwidth}{15em}
+
+\begin{document}
+
+\title{Hardware-Based Configurable Prefetcher}
+
+\author{
+\begin{tabular}{ c c c }
+	\parbox[t]{\authorboxwidth}{\centering
+		Connor Culloden \\
+		\textit{E.C.E. Department} \\
+		\textit{University of Arizona} \\
+		Tucson, AZ, USA \\
+		cullodenc@email.arizona.edu
+	}
+	&
+	\parbox[t]{\authorboxwidth}{\centering
+		Matthias Guenther \\
+		\textit{E.C.E. Department} \\
+		\textit{University of Arizona} \\
+		Tucson, AZ, USA \\
+		mrguenther@email.arizona.edu
+	}
+	&
+	\parbox[t]{\authorboxwidth}{\centering
+		Xiongjian Lin \\
+		\textit{E.C.E. Department} \\
+		\textit{University of Arizona} \\
+		Tucson, AZ, USA \\
+		xiongjianlin@email.arizona.edu
+	}
+\end{tabular}
+\\
+\\
+\setlength{\tabcolsep}{12pt} % twice the default
+\begin{tabular}{ c c }
+	\parbox[t]{\authorboxwidth}{\centering
+		Joshua Murphy \\
+		\textit{E.C.E. Department} \\
+		\textit{University of Arizona} \\
+		Tucson, AZ, USA \\
+		joshuapmurphy@email.arizona.edu
+	}
+	&
+	\parbox[t]{\authorboxwidth}{\centering
+		Brian Winkler \\
+		\textit{E.C.E. Department} \\
+		\textit{University of Arizona} \\
+		Tucson, AZ, USA \\
+		bwinkler@email.arizona.edu
+	}
+\end{tabular}
+\setlength{\tabcolsep}{6pt} % set back to default
+}
+
+\maketitle
+
+% \begin{adjustwidth}{4em}{-4em}
+% \centering
+% Joshua Murphy \\
+% \textit{E.C.E. Department} \\
+% \textit{University of Arizona} \\
+% Tucson, AZ, USA \\
+% joshuapmurphy@email.arizona.edu
+% \end{adjustwidth}
+
+\end{document}
