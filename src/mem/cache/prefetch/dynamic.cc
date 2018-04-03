@@ -7,39 +7,24 @@
  */
 
 DynamicPrefetcher::DynamicPrefetcher(const DynamicPrefetcherParams* p)
-	: BasePrefetcher(p) /*
-	, nextParameter(p->nextParameter)
-	, etc(p->etc) */
+    : BasePrefetcher(p),
+    instructionInterval(p->instruction_interval),
+    matchThreshold(p->match_threshold)
 {
+
 }
 
 DynamicPrefetcher::~DynamicPrefetcher(){
+
 }
-
-
-
 
 
 /*
  * PrefetchConfig definitions:
  */
 
-DynamicPrefetcher::
-PrefetchConfig::
-PrefetchConfig(int instructionInterval, int matchThreshold)
-	: instructionInterval(instructionInterval)
-	, matchThreshold(matchThreshold)
-{
-}
-
-DynamicPrefetcher::
-PrefetchConfig::
-~PrefetchConfig(){
-}
-
 void
 DynamicPrefetcher::
-PrefetchConfig::
 incrementPrefetchBlocks(){
 	if(prefetchBlocks < 0b111){
 		prefetchBlocks++;
@@ -48,7 +33,6 @@ incrementPrefetchBlocks(){
 
 void
 DynamicPrefetcher::
-PrefetchConfig::
 decrementPrefetchBlocks(){
 	if(prefetchBlocks > 0b000){
 		prefetchBlocks--;
@@ -57,7 +41,6 @@ decrementPrefetchBlocks(){
 
 void
 DynamicPrefetcher::
-PrefetchConfig::
 endInterval(){
 	if(matchCounter >= matchThreshold){
 		incrementPrefetchBlocks();
@@ -71,14 +54,12 @@ endInterval(){
 
 void
 DynamicPrefetcher::
-PrefetchConfig::
 storeInstruction(inst_t instruction){
 	storedInstruction = instruction;
 }
 
 void
 DynamicPrefetcher::
-PrefetchConfig::
 storeCurrentInstruction(){
 	// TODO: implement function.
 	throw std::string("Not implemented.");
@@ -86,7 +67,6 @@ storeCurrentInstruction(){
 
 void
 DynamicPrefetcher::
-PrefetchConfig::
 compareInstruction(inst_t instruction){
 	if(instruction == storedInstruction){
 		matchCounter++;
@@ -99,7 +79,12 @@ compareInstruction(inst_t instruction){
 
 char
 DynamicPrefetcher::
-PrefetchConfig::
 getPrefetchBlocks(){
 	return prefetchBlocks >> 1;
+}
+
+DynamicPrefetcher*
+DynamicPrefetcherParams::create()
+{
+    return new DynamicPrefetcher(this);
 }

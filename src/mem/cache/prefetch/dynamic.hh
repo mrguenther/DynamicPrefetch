@@ -1,15 +1,15 @@
-#ifndef __MEM_CACHE_PREFETCH_BASE_HH__
-#define __MEM_CACHE_PREFETCH_BASE_HH__
+#ifndef __MEM_CACHE_PREFETCH_DYNAMIC_HH__
+#define __MEM_CACHE_PREFETCH_DYNAMIC_HH__
 
 #include <cstdint>
 #include "mem/cache/prefetch/base.hh"
+#include "params/DynamicPrefetcher.hh"
 
 typedef uint32_t inst_t; // data type for instructions
 
-class DynamicPrefetcher : public BasePrefetcher {
+class DynamicPrefetcher : public BasePrefetcher
+{
 private:
-	class PrefetchConfig {
-	private:
 		int instructionInterval;
 		int instructionIndex;
 		int matchThreshold;
@@ -36,11 +36,12 @@ private:
 		 */
 		void endInterval();
 
-	public:
-		PrefetchConfig(int instructionInterval, int matchThreshold);
-		~PrefetchConfig();
+		
 
-		/**
+public:
+	DynamicPrefetcher(const DynamicPrefetcherParams *p);
+	~DynamicPrefetcher();
+	/**
 		 * Store instruction to storedInstruction.
 		 */
 		void storeInstruction(inst_t instruction);
@@ -67,11 +68,6 @@ private:
 		 * of prefetchBlocks, or (prefetchBlocks >> 1).
 		 */
 		char getPrefetchBlocks(); // return prefetchBlocks >> 1;
-	};
-
-public:
-	DynamicPrefetcher();
-	~DynamicPrefetcher();
 };
 
 #endif //__MEM_CACHE_PREFETCH_BASE_HH__
